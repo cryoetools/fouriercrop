@@ -1,0 +1,24 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: fouriercrop
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: etools
+    family-names: cryo
+    alias: fedejaure
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/cryoetools/fouriercrop/releases/tag/v0.2.0
+    description: The Software Heritage link for version 0.2.0.
+repository-code: 'https://github.com/cryoetools/fouriercrop'
+abstract: FourierCrop is a Python package that enables downsampling and other operations using Fourier domain cropping techniques. These operations can be used for tasks like reducing resolution or resizing while maintaining spatial coherence.
+keywords:
+  - fouriercrop
+license: MIT
+version: 0.2.0
