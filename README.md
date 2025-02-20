@@ -28,11 +28,15 @@ FourierCrop is a Python package that enables downsampling and other operations u
 
 ## Features
 
-* TODO
+- **FFT-based downsampling and cropping**: Performs operations in the frequency domain to achieve efficient resizing.
+- **Flexible padding options**: Allows for center cropping, padding, or combination of both.
+- **Multidimensional support**: Efficiently handles 2D image or 3D volumetric data.
 
 ## Quickstart
 
-TODO
+```bash
+pip install -U fouriercrop
+```
 
 ## Credits
 
