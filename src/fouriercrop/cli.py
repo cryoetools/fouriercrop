@@ -6,7 +6,7 @@ import numpy as np
 import torch
 import typer
 
-from .fouriercrop import FourierCrop, __version__, load_mrc, save_mrc
+from fouriercrop import FourierCrop, __version__, load_mrc, save_mrc
 
 app = typer.Typer()
 
