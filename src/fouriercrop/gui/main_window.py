@@ -15,7 +15,7 @@ import customtkinter
 from PIL import Image
 
 customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("./resources/color.json")
+customtkinter.set_default_color_theme(Path(__file__).resolve().parent / "resources/color.json")
 version = "v2.0.0"
 
 

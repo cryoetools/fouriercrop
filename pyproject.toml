@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fouriercrop"
-version = "1.0.0"
+version = "2.0.0"
 description = "FourierCrop is a Python package that enables downsampling and other operations using Fourier domain cropping techniques. These operations can be used for tasks like reducing resolution or resizing while maintaining spatial coherence."
 authors = ["cryoetools <cryoetools@outlook.com>"]
 readme = "README.md"
@@ -21,6 +21,7 @@ classifiers=[
 
 [tool.poetry.scripts]
 fouriercrop = 'fouriercrop.cli:app'
+fouriercrop-gui = 'fouriercrop.gui:launch_gui'
 
 [tool.poetry.dependencies]
 python = "<3.11,>=3.9"
@@ -56,6 +57,11 @@ mypy = "^1.13.0"
 [tool.poetry.group.docs.dependencies]
 sphinx = "^7.4.7"
 recommonmark = "^0.7.1"
+
+
+[tool.poetry.group.gui.dependencies]
+customtkinter = "^5.2.2"
+pillow = "^11.1.0"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
