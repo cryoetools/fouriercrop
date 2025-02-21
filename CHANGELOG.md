@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2025-02-20
+## [1.0.0] - 2025-02-21
 ### Added
 - First release on PyPI.
 
-[Unreleased]: https://github.com/cryoetools/fouriercrop/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/cryoetools/fouriercrop/compare/releases/tag/v0.2.0
+[Unreleased]: https://github.com/cryoetools/fouriercrop/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/cryoetools/fouriercrop/compare/releases/tag/v1.0.0
