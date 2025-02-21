@@ -26,7 +26,7 @@ fouriercrop-gui = 'fouriercrop.gui:launch_gui'
 [tool.poetry.dependencies]
 python = "<3.11,>=3.9"
 typer = {extras = ["all"], version = "^0.13.0"}
-torch = "2.1.2"
+torch = "2.6.0"
 numpy = "1.25.0"
 mrcfile = "^1.5.4"
 pydata-sphinx-theme = "^0.16.1"
