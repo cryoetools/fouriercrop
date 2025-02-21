@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fouriercrop"
-version = "0.3.0"
+version = "1.0.0"
 description = "FourierCrop is a Python package that enables downsampling and other operations using Fourier domain cropping techniques. These operations can be used for tasks like reducing resolution or resizing while maintaining spatial coherence."
 authors = ["cryoetools <cryoetools@outlook.com>"]
 readme = "README.md"
