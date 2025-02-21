@@ -2,10 +2,11 @@
 
 from typing import Annotated, Optional
 
+import numpy as np
 import torch
 import typer
 
-from fouriercrop import FourierCrop, __version__, load_mrc, save_mrc
+from .fouriercrop import FourierCrop, __version__, load_mrc, save_mrc
 
 app = typer.Typer()
 
@@ -31,8 +32,8 @@ def main(
 ) -> None:
     """Console script for fouriercrop."""
     if input_path:
-        x = torch.tensor(load_mrc(input_path), dtype=torch.float32).unsqueeze(0).unsqueeze(0)
-
+        x, v = load_mrc(input_path, output_type=torch.float32, get_voxel_size=True)
+        x = x.unsqueeze(0).unsqueeze(0)
         print(f"input shape: {x.shape}")
 
         fc_func = FourierCrop(pad_mode=pad_mode)
@@ -40,7 +41,7 @@ def main(
         print(f"output shape: {x.shape}")
 
         if output_path:
-            save_mrc(output_path, x.squeeze().numpy())
+            save_mrc(output_path, x.squeeze().numpy(), voxel_size=np.min(v))
             print(f"Save: {output_path}")
     else:
         print("fouriercrop.cli.main")

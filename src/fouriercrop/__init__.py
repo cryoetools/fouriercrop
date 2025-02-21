@@ -2,7 +2,7 @@
 
 __author__ = """cryoetools"""
 __email__ = "cryoetools@outlook.com"
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 from .fouriercrop import FourierCrop, load_mrc, save_mrc
 

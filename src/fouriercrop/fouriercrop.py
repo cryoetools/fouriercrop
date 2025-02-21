@@ -9,17 +9,63 @@ import numpy as np
 import torch
 
 
-def load_mrc(load_path: Union[str, Path]) -> np.ndarray:
-    """Loads data from an MRC file."""
+def load_mrc(
+    load_path: Union[str, Path],
+    output_type: type = np.float32,
+    get_voxel_size: bool = False,
+) -> Union[np.ndarray, torch.Tensor, Tuple[Union[np.ndarray, torch.Tensor], np.ndarray]]:
+    """Loads data from an MRC file and optionally retrieves voxel size.
+
+    Args:
+        load_path (Union[str, Path]): Path to the MRC file.
+        output_type (type, optional): Desired output data type (default=np.float32).
+        get_voxel_size (bool, optional): If True, returns voxel size (default=False).
+
+    Returns:
+        Tuple[Union[np.ndarray, torch.Tensor], np.ndarray]: The MRC data and voxel size.
+
+    Raises:
+        FileNotFoundError: If the input file does not exist.
+    """
+    if not Path(load_path).is_file():
+        raise FileNotFoundError(f"Error! {load_path} does not exist.")
+
     with mrcfile.open(load_path, permissive=True) as mrc:
+        voxel_size = np.array(
+            [mrc.voxel_size.z, mrc.voxel_size.y, mrc.voxel_size.x], dtype=np.float32
+        )
         data = mrc.data
-    return data
+
+    data = (
+        torch.from_numpy(data).to(output_type)
+        if isinstance(output_type, torch.dtype)
+        else data.astype(output_type)
+    )
+
+    return (data, voxel_size) if get_voxel_size else data
 
 
-def save_mrc(save_path: Union[str, Path], save_data: Union[np.ndarray, torch.Tensor]) -> None:
-    """Saves data to an MRC file."""
+def save_mrc(
+    save_path: Union[str, Path],
+    save_data: Union[np.ndarray, torch.Tensor],
+    voxel_size: float = 1.0,
+    output_type: type = np.float32,
+) -> None:
+    """Saves data to an MRC file.
+
+    Args:
+        save_path (Union[str, Path]): Path to save the MRC file.
+        save_data (Union[np.ndarray, torch.Tensor]): Data to save.
+        voxel_size (float, optional): Voxel size of the data (default=1.0).
+        output_type (type, optional): Desired output data type (default=np.float32).
+    """
+    if isinstance(save_data, torch.Tensor):
+        save_data = save_data.detach().cpu().numpy()
+    save_data = save_data.astype(output_type)
+
     with mrcfile.new(save_path, overwrite=True) as mrc:
         mrc.set_data(save_data)
+        mrc.voxel_size = (voxel_size,) * 3
 
 
 class FourierCrop:
