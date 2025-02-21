@@ -14,9 +14,11 @@ from typing import Tuple, Union
 import customtkinter
 from PIL import Image
 
+from .. import __version__
+
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme(Path(__file__).resolve().parent / "resources/color.json")
-version = "v2.0.0"
+version = f"v{__version__}"
 
 
 class CustomInputDialog(customtkinter.CTkInputDialog):
