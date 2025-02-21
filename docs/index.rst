@@ -1,5 +1,6 @@
 Welcome to fouriercrop's documentation!
 ===========================================================
+**Date**: |today|
 
 .. toctree::
    :maxdepth: 2

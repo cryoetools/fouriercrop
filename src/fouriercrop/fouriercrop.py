@@ -26,25 +26,6 @@ class FourierCrop:
     """Enables downsampling and other operations based on Fourier domain cropping.
 
     It supports 2D tensors in the BCHW format and 3D tensors in the BCDHW format.
-
-    Methods:
-        crop_center(x: torch.Tensor, bin_factor: int = 2) -> torch.Tensor:
-            Crops the central region of a tensor based on a specified bin_factor factor.
-
-        crop_center_pad(x: torch.Tensor, bin_factor: int = 2) -> torch.Tensor:
-            Crops the central region of a tensor and pads it back to its original size.
-
-        pad_center(x: torch.Tensor, bin_factor: int = 2) -> torch.Tensor:
-            Centers the original tensor within the new padded tensor
-
-        norm(x: torch.Tensor, **kwargs) -> torch.Tensor:
-            Normalizes a tensor by its mean and standard deviation.
-
-        fft(x: torch.Tensor, **kwargs) -> torch.Tensor:
-            Applies 3D Fast Fourier Transform (FFT) to input data.
-
-        ifft(x: torch.Tensor, **kwargs) -> torch.Tensor:
-            Applies Inverse Fast Fourier Transform (IFFT) to input data.
     """
 
     def __init__(

@@ -12,7 +12,7 @@ To install fouriercrop, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install fouriercrop
+    $ pip install -U fouriercrop
 
 This is the preferred method to install fouriercrop, as it will always install the most recent stable release.
 
