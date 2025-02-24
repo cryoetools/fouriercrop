@@ -35,7 +35,10 @@ FourierCrop is a Python package that enables downsampling and other operations u
 ## Quickstart
 
 ```bash
+conda create -n fouriercrop python=3.10.13 -y
+conda activate fouriercrop
 pip install -U fouriercrop
+conda install -c conda-forge tk=*=xft_* -y
 ```
 
 ## Credits
