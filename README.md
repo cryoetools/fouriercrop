@@ -33,14 +33,19 @@ FourierCrop is a Python package that enables downsampling and other operations u
 - **Multidimensional support**: Efficiently handles 2D image or 3D volumetric data.
 
 ## Quickstart
+### Install
 
 ```bash
 conda create -n fouriercrop python=3.10.13 -y
 conda activate fouriercrop
 pip install -U fouriercrop
 conda install -c conda-forge tk=*=xft_* -y
-```
 
+```
+### GUI
+```bash
+fouriercrop-gui
+```
 ## Credits
 
 This package was created with [Cookiecutter][cookiecutter] and the [fedejaure/cookiecutter-modern-pypackage][cookiecutter-modern-pypackage] project template.
