@@ -1,6 +1,7 @@
 """Tests for `fouriercrop-gui` module."""
 
 import tkinter as tk
+from typing import Generator
 
 import pytest
 
@@ -14,10 +15,10 @@ def test_launch_gui_import() -> None:
 
 
 @pytest.fixture
-def app_instance() -> None:
+def app_instance() -> Generator:
     """Fixture to create and yield an instance of the App class."""
     root = tk.Tk()
     root.withdraw()
-    app = App(root)
+    app = App(root)  # type: ignore [arg-type]
     yield app
     app.destroy()
