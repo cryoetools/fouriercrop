@@ -6,10 +6,11 @@ import signal
 import subprocess
 import threading
 import tkinter as tk
+import tkinter.messagebox as messagebox
 from functools import partial
 from pathlib import Path
 from tkinter import filedialog
-from typing import Tuple, Union
+from typing import Callable, Dict, Tuple, Union
 
 import customtkinter
 from PIL import Image
@@ -88,7 +89,7 @@ class App(customtkinter.CTk):
         # To keep track of the running process
         self.process = None
         self.stop_event = threading.Event()
-        self.loggers = {}
+        self.loggers: Dict[str, logging.Logger] = {}
 
         # Create frames
         self.build_navigation()
@@ -129,10 +130,11 @@ class App(customtkinter.CTk):
                         break
 
                     # Read output line by line
-                    line = self.process.stdout.readline()
-                    if not line:  # Break loop when no more output
-                        break
-                    append_text(textbox, line.strip())
+                    if self.process.stdout is not None:
+                        line = self.process.stdout.readline()
+                        if not line:  # Break loop when no more output
+                            break
+                        append_text(textbox, line.strip())
 
                 self.process.wait()  # Wait for process to exit
                 if not self.stop_event.is_set():  # Only show finished message if not terminated
@@ -164,7 +166,7 @@ class App(customtkinter.CTk):
         self,
         frame: customtkinter.CTkFrame,
         text: str,
-        command: callable,
+        command: Callable,
         size: int = 14,
         weight: str = "normal",
         width: int = 140,
@@ -186,9 +188,9 @@ class App(customtkinter.CTk):
         def create_button(
             master: customtkinter.CTkFrame,
             text: str,
-            command: callable,
+            command: Callable,
             image: customtkinter.CTkImage = None,
-        ) -> None:
+        ) -> customtkinter.CTkButton:
             """Creates a custom button with specified properties."""
             return customtkinter.CTkButton(
                 master,
@@ -299,7 +301,7 @@ class App(customtkinter.CTk):
 
         # --------------------------------
 
-        padx = (10, 20)
+        padx = (10, 20)  # type: ignore[assignment]
         pady = 5
 
         frame_2 = customtkinter.CTkFrame(master, fg_color="transparent")
@@ -352,7 +354,7 @@ class App(customtkinter.CTk):
                 pady=(0, pady) if row == 0 else pady,
             )
             if var_name == "norm_flag":
-                self.execute_var[var_name] = tk.IntVar()
+                self.execute_var[var_name] = tk.IntVar()  # type: ignore[assignment]
             else:
                 self.execute_var[var_name] = tk.StringVar()
 
@@ -397,9 +399,7 @@ class App(customtkinter.CTk):
     def on_close(self) -> None:
         """Handles the application's close event."""
         if self.process and self.process.poll() is None:
-            if tk.messagebox.askyesno(
-                "Exit Confirmation", "The program is running. Confirm exit?"
-            ):
+            if messagebox.askyesno("Exit Confirmation", "The program is running. Confirm exit?"):
                 os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
                 while True:
                     if self.process.poll() is not None:
@@ -433,7 +433,7 @@ class App(customtkinter.CTk):
 
     def change_scaling_event(self, inp: str) -> None:
         """Adjusts the widget scaling based on the input percentage string."""
-        inp = int(inp.rstrip("%")) / 100
+        inp = int(inp.rstrip("%")) / 100  # type: ignore[assignment]
         customtkinter.set_widget_scaling(inp)
 
     # ================================
@@ -452,7 +452,7 @@ class App(customtkinter.CTk):
         """Prompts user to select a file path and saves output."""
         stem = Path(self.execute_var["input_path"].get()).stem
         bin_factor = self.execute_var["bin_factor"].get()
-        bin_factor = 2 if bin_factor in [None, "None", ""] else bin_factor
+        bin_factor = "2" if bin_factor in [None, "None", ""] else bin_factor
         name = f"{stem}_bin{bin_factor}"
 
         file_path = filedialog.asksaveasfilename(
@@ -467,7 +467,7 @@ class App(customtkinter.CTk):
         """Clears the execute_textbox and resets execute_var values."""
         self.execute_textbox.delete("1.0", "end")
         for key, var in self.execute_var.items():
-            var.set(0 if key == "norm_flag" else "")
+            var.set(0 if key == "norm_flag" else "")  # type: ignore[arg-type]
 
     def run_execute_event(self) -> None:
         """Executes the shell command."""

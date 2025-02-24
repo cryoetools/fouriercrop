@@ -3,7 +3,6 @@
 from typing import Annotated, Optional
 
 import numpy as np
-import torch
 import typer
 
 from fouriercrop import FourierCrop, __version__, load_mrc, save_mrc
@@ -32,8 +31,8 @@ def main(
 ) -> None:
     """Console script for fouriercrop."""
     if input_path:
-        x, v = load_mrc(input_path, output_type=torch.float32, get_voxel_size=True)
-        x = x.unsqueeze(0).unsqueeze(0)
+        x, v = load_mrc(input_path, as_tensor=True, get_voxel_size=True)
+        x = x.unsqueeze(0).unsqueeze(0)  # type: ignore[union-attr]
         print(f"input shape: {x.shape}")
 
         fc_func = FourierCrop(pad_mode=pad_mode)

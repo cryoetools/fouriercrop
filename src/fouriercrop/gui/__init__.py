@@ -1,4 +1,4 @@
-"""Top-level package for fouriercrop."""
+"""Top-level package for fouriercrop-gui."""
 
 from .main_window import launch_gui
 
