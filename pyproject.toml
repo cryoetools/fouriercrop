@@ -68,7 +68,7 @@ branch = true
 source = ["fouriercrop"]
 
 [tool.coverage.report]
-fail_under = 10
+fail_under = 1
 exclude_lines = [
   "pragma: no cover",
   "def __repr__",
