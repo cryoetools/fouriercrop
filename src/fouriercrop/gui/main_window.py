@@ -119,7 +119,7 @@ class App(customtkinter.CTk):
                     stderr=subprocess.PIPE,
                     shell=True,
                     text=True,
-                    preexec_fn=os.setsid,  # ignore [attr-defined]
+                    preexec_fn=os.setsid,  # ignore[attr-defined]
                 )
 
                 while True:
@@ -127,7 +127,7 @@ class App(customtkinter.CTk):
                         # Terminate the process group
                         os.killpg(
                             os.getpgid(self.process.pid), signal.SIGTERM
-                        )  # ignore [attr-defined]
+                        )  # ignore[attr-defined]
                         append_text(textbox, "Command terminated by user.")
                         break
 
@@ -402,7 +402,7 @@ class App(customtkinter.CTk):
         """Handles the application's close event."""
         if self.process and self.process.poll() is None:
             if messagebox.askyesno("Exit Confirmation", "The program is running. Confirm exit?"):
-                os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)  # ignore [attr-defined]
+                os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)  # ignore[attr-defined]
                 while True:
                     if self.process.poll() is not None:
                         self.destroy()
