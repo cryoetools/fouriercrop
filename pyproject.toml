@@ -25,7 +25,7 @@ fouriercrop-gui = 'fouriercrop.gui:launch_gui'
 
 [tool.poetry.dependencies]
 python = "<3.11,>=3.9"
-typer = {extras = ["all"], version = "^0.13.0"}
+typer = {extras = ["all"], version = ">=0.13,<0.16"}
 torch = "2.1.2"
 numpy = "1.25.0"
 mrcfile = "^1.5.4"
